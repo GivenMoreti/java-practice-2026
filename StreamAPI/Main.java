@@ -167,12 +167,16 @@ public  class Main{
 
     //using stream.rangeClosed
     public static int sumOfFirstNNums(int n){
-        return IntStream.rangeClosed(1,n).sum();
+        return IntStream
+                .rangeClosed(1,n)
+                .sum();
     }
 
     //using range-which is not inclusive
     public static int sumOfFirstNNums3(int n){
-        return IntStream.range(1,n +1).sum();
+        return IntStream
+                .range(1,n +1)
+                .sum();
     }
 
     //Using math formula
@@ -191,7 +195,9 @@ public  class Main{
     }
 
     public static int sumOfFirstNNumsUsingAccumulator(int n){
-        return IntStream.rangeClosed(1,n).reduce(0,(accumulator,current) -> accumulator + current);
+        return IntStream
+                .rangeClosed(1,n)
+                .reduce(0,(accumulator,current) -> accumulator + current);
     }
 
     /*
