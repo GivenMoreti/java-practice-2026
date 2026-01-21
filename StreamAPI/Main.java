@@ -2,10 +2,11 @@ package StreamAPI;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+
 
 public  class Main{
     public static void main(String[] args) {
@@ -19,6 +20,51 @@ public  class Main{
 //                System.out.println(upperFruit);
 //            }
 //        }
+
+            List<City> cities = List.of(
+                    new City("a",100_000),
+                    new City("b",200_000),
+                    new City("c",500_000));
+
+            //compute the total population living in cities that have more than 100k inhabitants.
+        int sumPopulation = 0;
+        for(City c : cities){
+            if(c.population > 100_000){
+                sumPopulation += c.population;
+            }
+        }
+
+        //sum population 2 using streams api - map-> filter -> reduce
+        System.out.println(sumPopulation);
+
+        int sumPopStream = cities
+                .stream()
+                .mapToInt(c-> c.population)
+                .filter(population -> population  > 100_000)
+                        .sum();
+        System.out.println(sumPopStream);
+
+
+    //get those cities
+        List<String> citiesWithLargePopulation =
+                cities
+                .stream()
+                .filter(c -> c.population > 100_000)
+                .map(city -> city.name)
+                .toList();
+
+        System.out.println(citiesWithLargePopulation);
+
+
+
+
+
+         fruits
+                .stream()
+                .collect(Collectors.groupingBy(String::length,Collectors.counting()))
+                .forEach((key,value)-> System.out.println(key + " : "+ value));
+
+
 
         //using streams to filter
           fruits.stream()
@@ -224,6 +270,25 @@ class Student {
 
     public String toString(){
         return this.name + " " + this.subject + " " + this.marks;
+    }
+
+
+}
+
+
+class City {
+
+    int population;
+    String name;
+
+    public City(String name,int population){
+        this.name = name;
+        this.population = population;
+    }
+
+    @Override
+    public String toString(){
+        return this.name + " " + this.population;
     }
 
 
